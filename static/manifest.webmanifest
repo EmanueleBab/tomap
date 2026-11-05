@@ -1,0 +1,15 @@
+{
+  "id": "/",
+  "name": "Turin transit map",
+  "short_name": "Transit",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#172e3c",
+  "description": "Live Turin buses, trams and stop arrivals.",
+  "icons": [
+    {"src":"/static/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
+    {"src":"/static/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+  ]
+}

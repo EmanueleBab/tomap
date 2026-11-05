@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Turin transit map</title>
+  <meta name="theme-color" content="#172e3c">
+  <link rel="manifest" href="/static/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/static/icon-192.png">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script defer src="{{ url_for('static', filename='transit-canvas.js') }}"></script>
+  <script defer src="{{ url_for('static', filename='line-filters.js') }}"></script>
+  <script defer src="{{ url_for('static', filename='map.js') }}"></script>
+  <script defer src="{{ url_for('static', filename='traffic.js') }}"></script>
+  <script defer src="{{ url_for('static', filename='stops.js') }}"></script>
+  <script defer src="{{ url_for('static', filename='details.js') }}"></script>
+  <script defer src="{{ url_for('static', filename='location.js') }}"></script>
+  <script defer src="{{ url_for('static', filename='watch-db.js') }}"></script>
+  <script defer src="{{ url_for('static', filename='notifications.js') }}"></script>
+</head>
+<body>
+  <main id="map" aria-label="Live public transport map of Turin"></main>
+  <section class="panel" aria-label="Map filters">
+    <button id="panel-toggle" type="button" aria-expanded="true" aria-controls="panel-content"><span class="grip"></span><span>Explore</span><span id="panel-chevron">⌄</span></button>
+    <div id="panel-content">
+    <div class="modes" role="group" aria-label="Vehicle type">
+      <button class="active" data-mode="all" aria-pressed="true">All vehicles</button><button data-mode="bus" aria-pressed="false">Bus</button><button data-mode="tram" aria-pressed="false">Tram</button>
+    </div>
+    <div class="filters"><div class="line-filter"><span class="filter-label">Lines</span><details id="line-picker"><summary id="line-summary">All lines</summary><input id="line-search" type="search" placeholder="Find a line…" aria-label="Find a line" autocomplete="off"><div id="line-options" role="group" aria-label="Lines to show"></div><div class="line-actions"><button id="lines-all" type="button">All lines</button><button id="lines-save" type="button">Save selection</button><button id="lines-restore" type="button" hidden>Use saved</button></div><p id="lines-status" class="fine" role="status"></p></details></div><label>Vehicle<input id="vehicle" type="search" placeholder="Search ID…" autocomplete="off"></label></div>
+    <label class="toggle"><input id="show-stops" type="checkbox" checked> Show stops</label>
+    <label class="toggle"><input id="show-traffic" type="checkbox"> Traffic</label>
+    <div id="traffic-key" hidden><div class="traffic-scale"><span>Average speed</span><span>km/h</span></div><div class="traffic-scale"><span>● &lt;20</span><span>● 20–39</span><span>● 40+</span><span>● Unknown</span></div><p id="traffic-status" class="fine" role="status"></p></div>
+    <p id="stops-hint" class="fine" hidden></p>
+    <details id="saved-menu"><summary>Saved stops <span id="saved-count">0</span></summary><ul id="saved-list"></ul><p class="fine" id="saved-note"></p></details>
+    <details id="tracking-menu"><summary>Arrival notifications <span id="tracking-count">0</span></summary><p id="tracking-mode" class="fine"></p><ul id="tracking-list"></ul><button id="test-push" type="button" hidden>Test notification</button><p id="tracking-status" class="fine" role="status"></p></details>
+    <section id="selection" hidden aria-label="Selected transit details">
+      <div class="selection-heading"><strong id="selection-title"></strong><button id="clear-selection" type="button">Clear</button></div>
+      <label class="toggle"><input id="show-route" type="checkbox" checked> Route <button id="fit-route" type="button">Fit route</button></label>
+      <p id="route-status" class="fine" role="status"></p><div id="route-legend"></div>
+      <details id="vehicle-details" hidden open><summary>Vehicle details</summary><div id="vehicle-info"></div></details>
+    </section>
+    <details id="alerts-menu"><summary>Alerts <span id="alert-count">…</span></summary><label class="fine"><select aria-label="Alert scope" id="alert-scope"><option value="selected">This selection</option><option value="all">All services</option></select></label><p id="alert-status" class="fine"></p><div id="alert-list"></div></details>
+    <div class="summary"><strong id="count">Connecting…</strong><button id="reset">Turin</button></div>
+    <button id="install-app" type="button" hidden>Install app</button>
+    <p id="status" role="status" aria-live="polite">Waiting for GTT positions…</p>
+    <p id="freshness" hidden></p>
+    </div>
+  </section>
+  <div class="location-control"><button id="locate" type="button" aria-label="Show my location" title="My location">◎</button><p id="location-status" role="status" aria-live="polite"></p></div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+# Runtime data, downloaded feeds, devices and private VAPID keys
+.cache/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+node_modules/
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.crt
+*.cer
+*.p12
+*.pfx
+*.db
+*.sqlite
+*.sqlite3
+*.sqlite3-*
+*.log
+# Private deployment artifacts and exports
+local-https/
+SERVICES.md
+HTTPS-APPS.md
+setup-apps-https.py
+setup-local-https.sh
+*.zip
+*.tar
+*.tar.gz
+*.bak
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
